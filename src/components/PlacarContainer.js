@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Time from './Time';
 import Partida from './Partida';
+import PropTypes from 'prop-types'
 
 export default class PlacarContainer extends Component {
     constructor() {
@@ -24,27 +25,39 @@ export default class PlacarContainer extends Component {
     }
 
     render() {
+        const { partida, casa, visitante } = this.props;
+        const estilo = {float: 'left', marginRight: '30px'}
+
         return (
             <div>
-                <div style={{float: 'left', marginRight: '30px'}}>
+                <div style={estilo}>
                     <h3>Casa</h3>
-                    <Time   nome={this.props.casa.nome} 
+                    <Time   nome={casa.nome} 
                             gols={this.state.gols_casa} 
                             marcarGol={this.marcarGolCasa.bind(this)}/>
                 </div>
-                <div style={{float: 'left', marginRight: '30px'}}>
-                    <Partida estadio={this.props.partida.estadio} 
-                             data={this.props.partida.data} 
-                             horario={this.props.partida.horario}/>
+                <div style={estilo}>
+                    <Partida {...partida}/>
                 </div>
-                <div style={{float: 'left', marginRight: '30px'}}>
+                <div style={estilo}>
                     <h3>Visitante</h3>
-                    <Time   nome={this.props.visitante.nome}
+                    <Time   nome={visitante.nome}
                             gols={this.state.gols_visitante}
                             marcarGol={this.marcarGolVisitante.bind(this)} />
                 </div>
+                <div>{this.props.clima}</div>
                 <div style={{clear: 'both'}}></div>
             </div>
         );
     }
 }
+
+PlacarContainer.propTypes = {
+    clima: PropTypes.string,
+    tempo: PropTypes.number.isRequired,
+}
+
+PlacarContainer.defaultProps = {
+    clima: 'Ensolarado',
+}
+

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import api from '../api';
 import Contador from './Contador';
 import PlacarContainer from './PlacarContainer'
 
@@ -19,10 +18,7 @@ const dados = {
 
 class App extends Component {
   render() {
-    return <PlacarContainer partida={dados.partida}
-                            casa={dados.casa}
-                            visitante={dados.visitante}
-      />
+    return <PlacarContainer {...dados} tempo={92}/>
   }
 }
 
